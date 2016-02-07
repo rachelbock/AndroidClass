@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rage.firsthomework.MainActivity"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_vertical_margin"
+    android:paddingStart="@dimen/activity_vertical_margin"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/main_activity_linear_layout"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+        <Button
+            android:id="@+id/main_activity_prior_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/prior_day_button"
+            android:background="@android:color/holo_blue_dark"
+            style="@android:style/Widget.Holo.Button.Borderless.Small"
+            />
+        <Button
+            android:id="@+id/main_activity_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_button"
+            android:background="@android:color/holo_blue_dark"
+            style="@android:style/Widget.Holo.Button.Borderless.Small"
+            />
+        <Button
+            android:id="@+id/main_activity_next_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next_day_button"
+            android:background="@android:color/holo_blue_dark"
+            style="@android:style/Widget.Holo.Button.Borderless.Small"
+            />
+
+    </LinearLayout>
+
+<android.support.v7.widget.AppCompatSpinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_activity_spinner"
+    android:textAlignment="center"
+    android:paddingBottom="@dimen/homework_one_padding_size"
+    >
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <EditText
+        android:id="@+id/main_activity_plans_field"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_activity_spinner"
+        android:paddingBottom="@dimen/homework_one_padding_size"
+        android:layout_above="@id/main_activity_linear_layout"
+        android:hint="@string/edit_text_hint"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:imeActionLabel="@string/save_button"
+        android:imeOptions="actionUnspecified"
+        android:inputType="textAutoComplete|textCapSentences"
+        />
+
+
+
+
+
+
+</RelativeLayout>
