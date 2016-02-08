@@ -5,6 +5,7 @@
     <string name="next_day_button">Tuesday</string>
     <string name="edit_text_hint">Your plans for %s</string>
     <string name="top_current_day">Monday</string>
+    <string name="save_text">Your plans have been saved!</string>
     
     <string-array name="days_of_week">
         <item>Monday</item>

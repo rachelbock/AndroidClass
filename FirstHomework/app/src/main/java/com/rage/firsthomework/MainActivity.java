@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nextDay.setOnClickListener(this);
         spinner.setOnItemSelectedListener(this);
 
-        //editor set up, edit action listener setup for IME button. If the IME button is selected, save the text and hide the keyboard screen
+        //editor set up, edit action listener setup for IME button. If the IME button is selected, save the text and hide the keyboard
+        // screen. This also has a toast pop up when saving.
         editor = sharedPreferences.edit();
         plansText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editor.putString(daysOfWeek[currentDay], plansText.getText().toString()).apply();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(plansText.getWindowToken(), 0);
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.save_text), Toast.LENGTH_SHORT).show();
                     handled = true;
                 }
 
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v.getId() == R.id.main_activity_save) {
             editor.putString(daysOfWeek[currentDay], plansText.getText().toString()).apply();
+            Toast.makeText(MainActivity.this, getResources().getString(R.string.save_text), Toast.LENGTH_SHORT).show();
         }
 
     }
