@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:id="@+id/main_activity_linear_layout"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/homework_one_padding_size"
         >
 
         <Button
@@ -54,7 +54,6 @@
     android:layout_height="wrap_content"
     android:id="@+id/main_activity_spinner"
     android:textAlignment="center"
-    android:paddingBottom="@dimen/homework_one_padding_size"
     >
 
     </android.support.v7.widget.AppCompatSpinner>
@@ -64,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/main_activity_spinner"
-        android:paddingBottom="@dimen/homework_one_padding_size"
+        android:paddingTop="@dimen/homework_one_padding_size"
         android:layout_above="@id/main_activity_linear_layout"
         android:hint="@string/edit_text_hint"
         android:textAlignment="center"

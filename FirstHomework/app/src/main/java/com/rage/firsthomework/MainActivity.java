@@ -1,12 +1,15 @@
 package com.rage.firsthomework;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Button, text field, sharedPreferences variable creation
         previousDay = (Button) findViewById(R.id.main_activity_prior_day);
         Button saveButton = (Button) findViewById(R.id.main_activity_save);
         nextDay = (Button) findViewById(R.id.main_activity_next_day);
@@ -38,24 +42,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinner = (Spinner) findViewById(R.id.main_activity_spinner);
         sharedPreferences = getSharedPreferences("Homework1", MODE_PRIVATE);
 
+        //spinner setup - adding days of week array list to drop down
         Resources res = getResources();
         daysOfWeek = res.getStringArray(R.array.days_of_week);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.days_of_week, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.days_of_week, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        //On click and on selection listeners
         previousDay.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         nextDay.setOnClickListener(this);
         spinner.setOnItemSelectedListener(this);
-        editor = sharedPreferences.edit();
 
+        //editor set up, edit action listener setup for IME button. If the IME button is selected, save the text and hide the keyboard screen
+        editor = sharedPreferences.edit();
         plansText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                     editor.putString(daysOfWeek[currentDay], plansText.getText().toString()).apply();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(plansText.getWindowToken(), 0);
                     handled = true;
                 }
 
@@ -66,41 +75,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plansText.setText(sharedPreferences.getString(daysOfWeek[currentDay], ""));
     }
 
+    /**
+     * function to set the previous day and next day buttons to the correct date. Also updates the hint displayed and the spinner text
+     * Pulls text from shared preferences if there is data stored for the current day
+     */
+    public void setDay(int newDay) {
+        currentDay = newDay;
+        previousDay.setText(daysOfWeek[((currentDay - 1) + 7) % 7]);
+        nextDay.setText(daysOfWeek[(currentDay + 1) % 7]);
+        plansText.setText("");
+        String hintText = getResources().getString(R.string.edit_text_hint);
+        String replacedText = String.format(hintText, daysOfWeek[currentDay]);
+        plansText.setHint(replacedText);
+        spinner.setSelection(currentDay);
+        plansText.setText(sharedPreferences.getString(daysOfWeek[currentDay], ""));
+    }
+
+    /**
+     * On click - if the next day is pressed, the current day increases by one and the setDay function is called to reset the rest of
+     * the fields. If the previous day is pressed, the current day is increased and the setDay function resets the rest of the days. If
+     * the save button is pressed, the data is stored in shared preferences
+     */
     @Override
     public void onClick(View v) {
 
-            if (v.getId() == R.id.main_activity_next_day) {
-                currentDay = (currentDay + 1) % 7;
-                previousDay.setText(daysOfWeek[((currentDay - 1) + 7) % 7]);
-                nextDay.setText(daysOfWeek[(currentDay + 1) % 7]);
-                plansText.setText("");
-                plansText.setHint("Your Plans for " + daysOfWeek[currentDay]);
-                spinner.setSelection(currentDay);
-                plansText.setText(sharedPreferences.getString(daysOfWeek[currentDay], ""));
+        if (v.getId() == R.id.main_activity_next_day) {
+            setDay((currentDay+1)%7);
 
-            }
-            if (v.getId() == R.id.main_activity_prior_day) {
-                currentDay = ((currentDay-1)+7)%7;
-                previousDay.setText(daysOfWeek[((currentDay -1)+7)%7]);
-                nextDay.setText(daysOfWeek[(currentDay + 1) % 7]);
-                plansText.setHint("Your Plans for " + daysOfWeek[currentDay]);
-                spinner.setSelection(currentDay);
-                plansText.setText(sharedPreferences.getString(daysOfWeek[currentDay], ""));
-            }
+        }
+        if (v.getId() == R.id.main_activity_prior_day) {
+            setDay(((currentDay - 1) + 7) % 7);
+        }
 
-            if (v.getId() == R.id.main_activity_save) {
-                editor.putString(daysOfWeek[currentDay], plansText.getText().toString()).apply();
-            }
+        if (v.getId() == R.id.main_activity_save) {
+            editor.putString(daysOfWeek[currentDay], plansText.getText().toString()).apply();
+        }
 
     }
 
+    /**
+     * When a item is selected from the spinner, the current Day is updated to the position selected in the spinner. The SetDay function
+     * is called to reset the rest of the fields.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            currentDay = parent.getSelectedItemPosition();
-            previousDay.setText(daysOfWeek[((currentDay - 1) + 7) % 7]);
-            nextDay.setText(daysOfWeek[(currentDay + 1) % 7]);
-            plansText.setHint("Your Plans for " + daysOfWeek[currentDay]);
-            plansText.setText(sharedPreferences.getString(daysOfWeek[currentDay], ""));
+        setDay(parent.getSelectedItemPosition());
     }
 
     @Override
