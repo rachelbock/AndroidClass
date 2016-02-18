@@ -25,7 +25,6 @@ public class AniDifranco {
         return albumYear;
     }
     public String getAlbumPic() {
-
         return albumPic;
     }
 

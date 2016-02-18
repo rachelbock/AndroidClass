@@ -33,6 +33,10 @@ public class AniDifrancoRecyclerViewAdapter extends RecyclerView.Adapter<AniDifr
         AniDifranco aniDifranco = mADAlbums.get(position);
         holder.name.setText(aniDifranco.getAlbumName());
         holder.year.setText(aniDifranco.getAlbumYear());
+
+
+
+        holder.pic.setImageResource(R.drawable.ani_difranco_out_of_range);
     }
 
     @Override

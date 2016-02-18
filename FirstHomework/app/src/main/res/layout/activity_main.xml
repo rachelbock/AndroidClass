@@ -49,14 +49,14 @@
 
     </LinearLayout>
 
-<android.support.v7.widget.AppCompatSpinner
+<Spinner
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/main_activity_spinner"
     android:textAlignment="center"
     >
 
-    </android.support.v7.widget.AppCompatSpinner>
+    </Spinner>
 
     <EditText
         android:id="@+id/main_activity_plans_field"

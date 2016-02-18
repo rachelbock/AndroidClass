@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Homework2</string>
+    <string name="row_pokemon_id_text">1</string>
+    <string name="row_pokemon_name_text">bulbasaur</string>
+    <string name="row_pokemon_weight_text">W: 69</string>
+    <string name="row_pokemon_height_text">H: 7</string>
+</resources>
