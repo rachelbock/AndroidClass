@@ -11,7 +11,12 @@ public class Pokemon implements Parcelable {
 
     // id,identifier,species_id,height,weight
 
-    private String mName, mId, mSpeciesId, mHeight, mWeight;
+    private String mName;
+    private String mId;
+    private String mSpeciesId;
+    private String mHeight;
+    private String mWeight;
+    private String mUrl;
 
 
     public Pokemon(String csvStr) {
@@ -25,7 +30,9 @@ public class Pokemon implements Parcelable {
     }
 
     public String getImageUrl() {
-        return "http://img.pokemondb.net/artwork/" + getName() + ".jpg";
+
+        mUrl = "http://img.pokemondb.net/artwork/" + getName() + ".jpg";
+        return mUrl;
     }
 
 
@@ -61,6 +68,8 @@ public class Pokemon implements Parcelable {
         dest.writeString(mSpeciesId);
         dest.writeString(mHeight);
         dest.writeString(mWeight);
+        dest.writeString(mUrl);
+
     }
 
     public static final Parcelable.Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
@@ -81,5 +90,6 @@ public class Pokemon implements Parcelable {
         mSpeciesId = source.readString();
         mHeight = source.readString();
         mWeight = source.readString();
+        mUrl = source.readString();
     }
 }

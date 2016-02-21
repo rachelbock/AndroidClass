@@ -2,6 +2,24 @@
     <string name="app_name">Homework2</string>
     <string name="row_pokemon_id_text">1</string>
     <string name="row_pokemon_name_text">bulbasaur</string>
-    <string name="row_pokemon_weight_text">W: 69</string>
-    <string name="row_pokemon_height_text">H: 7</string>
+    <string name="row_pokemon_weight_text">Weight: %s</string>
+    <string name="row_pokemon_height_text">Height: %s</string>
+    <string name="no_internet_connection_error_message">You do not have an internet connection</string>
+    <string name="base_experience">Base Experience: %s</string>
+    <string name="attack">Attack: %s</string>
+    <string name="defense">Defense: %s</string>
+    <string name="special_attack">Special-Attack: %s</string>
+    <string name="special_defense">Special-Defense: %s</string>
+    <string name="speed">Speed: %s</string>
+    <string name="hp">HP: %s</string>
+    <string name="title_text">Title Text</string>
+    <string name="detail_page_pokemon_image_content_description">detail_page_pokemon_image</string>
+    <string name="pre_hp_text">HP:</string>
+    <string name="pre_speed_text">Speed:</string>
+    <string name="pre_special_defense_text">Special Defense:</string>
+    <string name="pre_special_attack_text">Special Attack:</string>
+    <string name="pre_defense_text">Defense:</string>
+    <string name="pre_attack_text">Attack:</string>
+    <string name="pre_base_experience_text">Base Experience:</string>
+
 </resources>
