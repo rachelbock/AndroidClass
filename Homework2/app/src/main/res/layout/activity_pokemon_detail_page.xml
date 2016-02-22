@@ -29,13 +29,43 @@
         tools:background="@android:color/holo_blue_dark"
         android:contentDescription="@string/detail_page_pokemon_image_content_description"
         />
+    <LinearLayout
+        android:id="@+id/detail_page_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/detail_page_image_view"
+        android:padding="5dp"
+        >
+        <TextView
+            android:id="@+id/detail_page_weight_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/row_pokemon_weight_text"
+            android:layout_weight="1"
+            />
 
+        <TextView
+            android:id="@+id/detail_page_height_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/row_pokemon_height_text"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/detail_page_id_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_page_id"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
         <TextView
         android:id="@+id/detail_page_hp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_hp_text"
-        android:layout_below="@id/detail_page_image_view"
+        android:layout_below="@id/detail_page_linear_layout"
         android:padding="5dp"
         />
 
@@ -43,7 +73,6 @@
         android:id="@+id/detail_page_speed_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_speed_text"
         android:layout_below="@id/detail_page_hp_text"
         android:padding="5dp"
         />
@@ -52,7 +81,6 @@
         android:id="@+id/detail_page_special_defense_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_special_defense_text"
         android:layout_below="@id/detail_page_speed_text"
         android:padding="5dp"
         />
@@ -61,7 +89,6 @@
         android:id="@+id/detail_page_special_attack_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_special_attack_text"
         android:layout_below="@id/detail_page_special_defense_text"
         android:padding="5dp"
         />
@@ -70,7 +97,6 @@
         android:id="@+id/detail_page_defense_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_defense_text"
         android:layout_below="@id/detail_page_special_attack_text"
         android:padding="5dp"
         />
@@ -79,7 +105,6 @@
         android:id="@+id/detail_page_attack_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_attack_text"
         android:layout_below="@id/detail_page_defense_text"
         android:padding="5dp"
         />
@@ -88,7 +113,6 @@
         android:id="@+id/detail_page_base_experience_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pre_base_experience_text"
         android:padding="5dp"
         android:layout_below="@id/detail_page_attack_text"
         />
@@ -98,10 +122,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_below="@id/detail_page_base_experience_text"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+        android:layout_below="@id/detail_page_linear_layout"
+        style="@android:style/Widget.Material.ProgressBar.Large"
         android:indeterminate="true"
-
         />
 
 </RelativeLayout>

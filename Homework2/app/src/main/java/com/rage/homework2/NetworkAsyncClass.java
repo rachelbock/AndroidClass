@@ -18,10 +18,9 @@ import java.net.URL;
 /**
  * Created by rage on 2/18/16.
  */
-public class NetworkAsyncClass extends AsyncTask<String, Integer, JSONObject> {
+public class NetworkAsyncClass extends AsyncTask<Pokemon, Integer, JSONObject> {
 
     public static final String TAG = NetworkAsyncClass.class.getSimpleName();
-    private Pokemon pokemon;
     PokemonDetailPage detailPage;
 
     public NetworkAsyncClass(PokemonDetailPage detailPage) {
@@ -35,18 +34,18 @@ public class NetworkAsyncClass extends AsyncTask<String, Integer, JSONObject> {
     }
 
     @Override
-    protected JSONObject doInBackground(String... params) {
+    protected JSONObject doInBackground(Pokemon... params) {
 
         if (params.length == 0) {
             return null;
         }
-        String pokemonId = params[0];
+        Pokemon onePokemon = params[0];
 
         JSONObject jsonObject = null;
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            URL url = new URL("http://pokeapi.co/api/v2/pokemon/" + pokemonId);
+            URL url = new URL("http://pokeapi.co/api/v2/pokemon/" + onePokemon.getId());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             InputStreamReader inputStream = new InputStreamReader(connection.getInputStream());
@@ -75,7 +74,7 @@ public class NetworkAsyncClass extends AsyncTask<String, Integer, JSONObject> {
 
 
     @Override
-    protected void onProgressUpdate(Integer...params) {
+    protected void onProgressUpdate(Integer... params) {
         ProgressBar pBar = (ProgressBar) detailPage.findViewById(R.id.detail_page_progress_bar);
         pBar.animate();
     }
@@ -93,18 +92,12 @@ public class NetworkAsyncClass extends AsyncTask<String, Integer, JSONObject> {
 
         if (jsonObject == null) {
             Log.d(TAG, "The resulting jsonObject is null");
-        }
-        else {
-            TextView experience = (TextView) detailPage.findViewById(R.id.detail_page_base_experience_text);
-            TextView speed = (TextView) detailPage.findViewById(R.id.detail_page_speed_text);
-            TextView specialDefense = (TextView) detailPage.findViewById(R.id.detail_page_special_defense_text);
-            TextView specialAttack = (TextView) detailPage.findViewById(R.id.detail_page_special_attack_text);
-            TextView defense = (TextView) detailPage.findViewById(R.id.detail_page_defense_text);
-            TextView attack = (TextView) detailPage.findViewById(R.id.detail_page_attack_text);
-            TextView hp = (TextView) detailPage.findViewById(R.id.detail_page_hp_text);
+        } else {
+            Pokemon pokemon = detailPage.getPokemon();
+
             try {
                 int base_experience = jsonObject.getInt("base_experience");
-                experience.setText(detailPage.getString(R.string.base_experience, base_experience));
+                pokemon.setBaseExperience(detailPage.getString(R.string.base_experience, base_experience));
 
                 JSONArray statsArray = jsonObject.getJSONArray("stats");
 
@@ -115,24 +108,20 @@ public class NetworkAsyncClass extends AsyncTask<String, Integer, JSONObject> {
                     String statName = subStat.getString("name");
 
                     if (statName.equals("speed")) {
-                        speed.setText(detailPage.getString(R.string.speed, baseStat));
-                    }
-                    else if (statName.equals("special-defense")) {
-                        specialDefense.setText(detailPage.getString(R.string.special_defense, baseStat));
-                    }
-                    else if (statName.equals("special-attack")) {
-                        specialAttack.setText(detailPage.getString(R.string.special_attack, baseStat));
-                    }
-                    else if (statName.equals("defense")) {
-                        defense.setText(detailPage.getString(R.string.defense, baseStat));
-                    }
-                    else if (statName.equals("attack")) {
-                        attack.setText(detailPage.getString(R.string.attack, baseStat));
-                    }
-                    else if (statName.equals("hp")) {
-                        hp.setText(detailPage.getString(R.string.hp, baseStat));
+                        pokemon.setSpeed(detailPage.getString(R.string.speed, baseStat));
+                    } else if (statName.equals("special-defense")) {
+                        pokemon.setSpecialDefense(detailPage.getString(R.string.special_defense, baseStat));
+                    } else if (statName.equals("special-attack")) {
+                        pokemon.setSpecialAttack(detailPage.getString(R.string.special_attack, baseStat));
+                    } else if (statName.equals("defense")) {
+                        pokemon.setDefense(detailPage.getString(R.string.defense, baseStat));
+                    } else if (statName.equals("attack")) {
+                        pokemon.setAttack(detailPage.getString(R.string.attack, baseStat));
+                    } else if (statName.equals("hp")) {
+                        pokemon.setHp(detailPage.getString(R.string.hp, baseStat));
                     }
                 }
+                detailPage.setTextFields(pokemon);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements PokemonRecyclerVi
      */
     private RecyclerView recyclerView;
     public static final int CODE_POKEMON = 0;
+    private Pokedex pokedex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements PokemonRecyclerVi
         recyclerView = (RecyclerView) findViewById(R.id.homework2_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Pokedex pokedex = new Pokedex();
+        pokedex = new Pokedex();
         PokemonRecyclerViewAdapter adapter = new PokemonRecyclerViewAdapter(pokedex.getPokemons(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -44,7 +45,12 @@ public class MainActivity extends AppCompatActivity implements PokemonRecyclerVi
 
         if (requestCode == CODE_POKEMON && resultCode == RESULT_OK) {
             Pokemon aPokemon = data.getParcelableExtra(PokemonDetailPage.ARG_POKEMON);
-            Snackbar.make(recyclerView, "I saw " + aPokemon.getName(), Snackbar.LENGTH_LONG).show();
+            //loop over all of the pokemon - if the pokemon at i has same id as apokemon than swap out that index.
+            for (int i = 0; i < pokedex.getPokemons().size(); i++) {
+                if (pokedex.getPokemons().get(i).getId().equals(aPokemon.getId())) {
+                    pokedex.getPokemons().set(i, aPokemon);
+                }
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data);

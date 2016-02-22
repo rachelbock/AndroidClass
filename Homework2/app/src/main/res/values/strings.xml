@@ -21,5 +21,6 @@
     <string name="pre_defense_text">Defense:</string>
     <string name="pre_attack_text">Attack:</string>
     <string name="pre_base_experience_text">Base Experience:</string>
+    <string name="detail_page_id">ID: %s</string>
 
 </resources>
