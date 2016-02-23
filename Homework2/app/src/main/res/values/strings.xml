@@ -14,13 +14,10 @@
     <string name="hp">HP: %s</string>
     <string name="title_text">Title Text</string>
     <string name="detail_page_pokemon_image_content_description">detail_page_pokemon_image</string>
-    <string name="pre_hp_text">HP:</string>
-    <string name="pre_speed_text">Speed:</string>
-    <string name="pre_special_defense_text">Special Defense:</string>
-    <string name="pre_special_attack_text">Special Attack:</string>
-    <string name="pre_defense_text">Defense:</string>
-    <string name="pre_attack_text">Attack:</string>
-    <string name="pre_base_experience_text">Base Experience:</string>
     <string name="detail_page_id">ID: %s</string>
+    <string name="detail_page_stats">Stats:</string>
+    <string name="pokedex_main_title">Pokedex</string>
+    <string name="activity_main_title">Pokedex</string>
+    <string name="main_activity_title">Rachel\'s Pokedex</string>
 
 </resources>

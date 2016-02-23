@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/title_text"
+        android:textStyle="bold"
         android:textSize="30sp"
         android:padding="10sp"
         />
@@ -28,101 +30,188 @@
         android:layout_below="@id/detail_page_title_text"
         tools:background="@android:color/holo_blue_dark"
         android:contentDescription="@string/detail_page_pokemon_image_content_description"
+        android:layout_marginBottom="10dp"
         />
     <LinearLayout
-        android:id="@+id/detail_page_linear_layout"
+        android:id="@+id/detail_page_horizontal_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/detail_page_image_view"
-        android:padding="5dp"
+        android:layout_marginBottom="10dp"
         >
         <TextView
+            android:gravity="center"
             android:id="@+id/detail_page_weight_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/row_pokemon_weight_text"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
+            android:textSize="15sp"
             />
 
         <TextView
+
+            android:gravity="center"
             android:id="@+id/detail_page_height_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/row_pokemon_height_text"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
+            android:textSize="15sp"
             />
         <TextView
+
+            android:gravity="center"
             android:id="@+id/detail_page_id_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/detail_page_id"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
+            android:textSize="15sp"
             />
-
     </LinearLayout>
-        <TextView
-        android:id="@+id/detail_page_hp_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_linear_layout"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/detail_page_speed_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_hp_text"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/detail_page_special_defense_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_speed_text"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/detail_page_special_attack_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_special_defense_text"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/detail_page_defense_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_special_attack_text"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/detail_page_attack_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_page_defense_text"
-        android:padding="5dp"
-        />
 
     <TextView
         android:id="@+id/detail_page_base_experience_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_below="@id/detail_page_attack_text"
+        android:padding="10dp"
+        tools:text="@string/base_experience"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/detail_page_horizontal_linear_layout"
         />
+<android.support.v7.widget.CardView
+    android:id="@+id/detail_page_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    android:layout_below="@id/detail_page_base_experience_text"
+    android:visibility="invisible"
+    >
+    <LinearLayout
+        android:id="@+id/detail_page_stats_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/detail_page_base_experience_text"
+        android:padding="10dp"
+
+        >
+        <TextView
+            android:id="@+id/detail_page_stats_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_page_stats"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_hp_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/hp"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_hp_bar"
+            android:src="@drawable/rectangle"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_speed_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/speed"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_speed_bar"
+            android:src="@drawable/rectangle"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_special_defense_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/special_defense"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_special_defense_bar"
+            android:src="@drawable/rectangle"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_special_attack_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/special_attack"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_special_attack_bar"
+            android:src="@drawable/rectangle"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_defense_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/defense"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_defense_bar"
+            android:src="@drawable/rectangle"
+            />
+
+        <TextView
+            android:id="@+id/detail_page_attack_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/attack"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/detail_page_attack_bar"
+            android:src="@drawable/rectangle"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
 
     <ProgressBar
         android:id="@+id/detail_page_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_below="@id/detail_page_linear_layout"
+        android:layout_below="@id/detail_page_horizontal_linear_layout"
         style="@android:style/Widget.Material.ProgressBar.Large"
         android:indeterminate="true"
         />

@@ -3,7 +3,6 @@ package com.rage.homework2;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,13 +19,25 @@ import java.net.URL;
  */
 public class NetworkAsyncClass extends AsyncTask<Pokemon, Integer, JSONObject> {
 
+
+
     public static final String TAG = NetworkAsyncClass.class.getSimpleName();
     PokemonDetailPage detailPage;
-
     public NetworkAsyncClass(PokemonDetailPage detailPage) {
         this.detailPage = detailPage;
     }
 
+
+    /**
+     * The following methods are required for the AsyncTask implementation.
+     * OnPreExecute - create a log message to say that the task has started.
+     * DoInBackground - connect to the API and create a JSON object from the data at the url. this
+     * method takes in a Pokemon object - the url is based off of the ID of that pokemon.
+     * onProgressUpdate - sets the progress bar to run.
+     * onCancelled - creates a log message to say that the task has been cancelled.
+     * onPostExecute - takes in the JSONobject from DoInBackground and finds the specific fields
+     * in the JSON object and calls the setText method from the DetailPage to update the view.
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -96,29 +107,30 @@ public class NetworkAsyncClass extends AsyncTask<Pokemon, Integer, JSONObject> {
             Pokemon pokemon = detailPage.getPokemon();
 
             try {
-                int base_experience = jsonObject.getInt("base_experience");
-                pokemon.setBaseExperience(detailPage.getString(R.string.base_experience, base_experience));
+                String base_experience = jsonObject.getString("base_experience");
+                pokemon.setBaseExperience(base_experience);
 
                 JSONArray statsArray = jsonObject.getJSONArray("stats");
 
                 for (int i = 0; i < statsArray.length(); i++) {
                     JSONObject stat = statsArray.getJSONObject(i);
                     String baseStat = stat.getString("base_stat");
+
                     JSONObject subStat = stat.getJSONObject("stat");
                     String statName = subStat.getString("name");
 
                     if (statName.equals("speed")) {
-                        pokemon.setSpeed(detailPage.getString(R.string.speed, baseStat));
+                        pokemon.setSpeed(baseStat);
                     } else if (statName.equals("special-defense")) {
-                        pokemon.setSpecialDefense(detailPage.getString(R.string.special_defense, baseStat));
+                        pokemon.setSpecialDefense(baseStat);
                     } else if (statName.equals("special-attack")) {
-                        pokemon.setSpecialAttack(detailPage.getString(R.string.special_attack, baseStat));
+                        pokemon.setSpecialAttack(baseStat);
                     } else if (statName.equals("defense")) {
-                        pokemon.setDefense(detailPage.getString(R.string.defense, baseStat));
+                        pokemon.setDefense(baseStat);
                     } else if (statName.equals("attack")) {
-                        pokemon.setAttack(detailPage.getString(R.string.attack, baseStat));
+                        pokemon.setAttack(baseStat);
                     } else if (statName.equals("hp")) {
-                        pokemon.setHp(detailPage.getString(R.string.hp, baseStat));
+                        pokemon.setHp(baseStat);
                     }
                 }
                 detailPage.setTextFields(pokemon);
