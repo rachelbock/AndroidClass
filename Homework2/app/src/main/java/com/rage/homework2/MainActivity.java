@@ -1,6 +1,5 @@
 package com.rage.homework2;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +33,12 @@ public class MainActivity extends AppCompatActivity implements PokemonRecyclerVi
     public void onPokemonRowClick(Pokemon pokemon) {
         Intent intent = new Intent(MainActivity.this, PokemonDetailPage.class);
         intent.putExtra(PokemonDetailPage.ARG_POKEMON, pokemon);
-        startActivityForResult(intent, RESPONSE_CODE_POKEMON, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivityForResult(intent, RESPONSE_CODE_POKEMON);
+        //entering id and exiting id
+//        overridePendingTransition(android.R.anim.slideleft, slideright);
+        //create a new resource director - anim - new animation resource file
+        //example - slide in from left/right <translate from x delta 100% to x delta 0% for left do 0 to -100%
+        //also give it a duration
     }
 
     /**
