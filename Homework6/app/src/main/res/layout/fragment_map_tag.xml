@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapTagFragment">
+
+  <com.google.android.gms.maps.MapView
+      android:id="@+id/map_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+  </com.google.android.gms.maps.MapView>
+
+    <ToggleButton
+        android:id="@+id/map_fragment_toggle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/remove_markers"
+        android:textOn="@string/add_markers"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

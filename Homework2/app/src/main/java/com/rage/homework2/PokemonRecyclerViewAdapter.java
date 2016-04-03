@@ -26,7 +26,7 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
     private final ArrayList<Pokemon> Pokemons;
 
     /**
-     *Adapter constructor which takes in the arrayList of Pokemon and the OnClickListener and sets them.
+     *Adapter constructor which takes in the arrayList of Pokemon and the OnClickListener `and sets them.
      */
     public PokemonRecyclerViewAdapter(ArrayList<Pokemon> pokemons, OnPokemonRowClickListener listener) {
         Pokemons = pokemons;

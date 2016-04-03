@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rage.homework6.MapTagDialogFragment">
+
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/dialog_fragment_title_edit_text"
+       android:hint="@string/title"
+       android:gravity="center"
+       />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_fragment_description_edit_text"
+        android:hint="@string/description"
+        android:gravity="center"
+        />
+
+</LinearLayout>
