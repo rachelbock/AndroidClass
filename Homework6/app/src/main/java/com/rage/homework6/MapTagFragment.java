@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -33,6 +36,7 @@ public class MapTagFragment extends Fragment implements OnMapReadyCallback {
     private User mainUser;
     @Bind(R.id.map_fragment_toggle_button)
     ToggleButton toggleButton;
+
     public static final String ARG_TAG_FRAGMENT = "MapTagFragment";
     public static final String TAG = MapTagFragment.class.getSimpleName();
     private UserLocalDatabaseSQLiteHelper userLocalDatabaseSQLiteHelper;
@@ -118,13 +122,7 @@ public class MapTagFragment extends Fragment implements OnMapReadyCallback {
                    //do nothing
                 }
                 else {
-                    map.addMarker(new MarkerOptions()
-                                    .position(latLng)
-                                    .draggable(true)
-                    );
-
                     MapTagDialogFragment dialogFragment = new MapTagDialogFragment();
-
                     dialogFragment.setTargetFragment(MapTagFragment.this, 0);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "dialog");
 
@@ -158,6 +156,12 @@ public class MapTagFragment extends Fragment implements OnMapReadyCallback {
         MapTag mapTag = new MapTag(mainUser.getIdNumber(), latLong.latitude, latLong.longitude, title, description);
         Log.d(TAG, mapTag.toString());
         userLocalDatabaseSQLiteHelper.insertMapTag(mapTag);
+        map.addMarker(new MarkerOptions()
+                        .position(latLong)
+                        .draggable(true)
+                        .title(title)
+                        .snippet(description)
+        );
     }
 
 
@@ -172,7 +176,16 @@ public class MapTagFragment extends Fragment implements OnMapReadyCallback {
                 .snippet(mapTag.getTagDescription())
             );
         }
+    }
 
+    @OnClick(R.id.map_fragment_toggle_button)
+    public void onToggleButtonClicked (Button button) {
+        if (toggleButton.isChecked()) {
+            Toast.makeText(getContext(), R.string.remove_marker_mode, Toast.LENGTH_LONG).show();
+        }
+        else {
+           Toast.makeText(getContext(), R.string.add_marker_mode, Toast.LENGTH_LONG).show();
+        }
     }
 
 }

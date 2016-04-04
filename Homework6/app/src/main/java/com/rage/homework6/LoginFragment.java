@@ -2,6 +2,7 @@ package com.rage.homework6;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
 
@@ -32,6 +33,8 @@ public class LoginFragment extends Fragment {
     EditText userName;
     @Bind(R.id.login_fragment_globe_image)
     ImageView globeImage;
+    @Bind(R.id.login_fragment_relative_layout)
+    RelativeLayout relativeLayout;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -61,7 +64,7 @@ public class LoginFragment extends Fragment {
     public void onAddUserButtonClicked(Button button) {
 
         if (userName.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Please enter a user name", Toast.LENGTH_SHORT).show();
+            Snackbar.make(relativeLayout, R.string.enter_username, Snackbar.LENGTH_SHORT).show();
         }
 
         else {
@@ -71,7 +74,7 @@ public class LoginFragment extends Fragment {
             boolean userExists = doesUserExist(user);
 
             if (userExists) {
-                Toast.makeText(getContext(), R.string.user_already_exists, Toast.LENGTH_SHORT).show();
+                Snackbar.make(relativeLayout, R.string.user_already_exists, Snackbar.LENGTH_SHORT).show();
             } else {
                 userLocalDatabaseSQLiteHelper.insertUser(user);
                 int id = userLocalDatabaseSQLiteHelper.getIdForUserWithName(user.getName());
@@ -88,7 +91,7 @@ public class LoginFragment extends Fragment {
     public void onLoginButtonClicked(Button button) {
 
         if (userName.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Please enter a user name", Toast.LENGTH_SHORT).show();
+            Snackbar.make(relativeLayout, R.string.enter_username, Snackbar.LENGTH_SHORT).show();
         }
 
         else {
@@ -103,7 +106,7 @@ public class LoginFragment extends Fragment {
                 transaction.replace(R.id.main_activity_frame_layout, MapTagFragment.newInstance(user));
                 transaction.commit();
             } else {
-                Toast.makeText(getContext(), R.string.user_does_not_exist, Toast.LENGTH_SHORT).show();
+                Snackbar.make(relativeLayout, R.string.user_does_not_exist, Snackbar.LENGTH_SHORT).show();
             }
         }
 

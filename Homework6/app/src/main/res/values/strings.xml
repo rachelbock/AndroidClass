@@ -18,4 +18,7 @@
     <string name="globe_image">globe_image</string>
     <string name="remove_markers">Remove Markers</string>
     <string name="add_markers">Add Markers</string>
+    <string name="add_marker_mode">You are back in Add Marker Mode</string>
+    <string name="remove_marker_mode">You are now in Remove Marker mode</string>
+    <string name="enter_username">Please enter a user name</string>
 </resources>

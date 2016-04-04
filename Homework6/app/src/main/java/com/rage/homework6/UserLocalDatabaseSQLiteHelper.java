@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -131,7 +132,11 @@ public class UserLocalDatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
     public void removeMapTag(LatLng latLng) {
-        getWritableDatabase().delete(MapTag.TABLE_NAME, MapTag.COLUMN_LATITUDE + " = " +
-                latLng.latitude + " AND " + MapTag.COLUMN_LONGITUDE + " = " + latLng.longitude, null);
+        String query = MapTag.COLUMN_LATITUDE + " <= " +
+                (latLng.latitude+0.01) + " AND " + MapTag.COLUMN_LATITUDE + " >= " + (latLng.latitude-.01) + " AND " +
+                MapTag.COLUMN_LONGITUDE + " <= " + (latLng.longitude+.01) + " AND " + MapTag.COLUMN_LONGITUDE +" >= " +
+                (latLng.longitude-.01);
+        Log.d(TAG, query);
+        getWritableDatabase().delete(MapTag.TABLE_NAME, query, null);
     }
 }

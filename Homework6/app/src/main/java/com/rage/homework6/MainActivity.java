@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         toolbar.setTitle(R.string.mapplication);
-        toolbar.setTitleTextColor(-1);
         setSupportActionBar(toolbar);
 
 
